@@ -1245,6 +1245,42 @@ body {
     .contact-headline { font-size: 1.4rem; margin-bottom: 1.5rem; }
 }
 
+/* ==================================================== */
+/* VERTICAL MOBILE: LOW-CEILING COMPRESSION (< 820px)   */
+/* Ensures "Zero-Scroll" integrity on shorter phones    */
+/* ==================================================== */
+@media (max-width: 850px) and (max-height: 820px) {
+    .snap-section {
+        padding-top: 4rem !important; /* Reclaim ceiling space */
+        padding-bottom: 0.5rem !important;
+    }
+    
+    #about .section-title {
+        margin-bottom: 0 !important;
+    }
+
+    .profile-img {
+        width: 80px !important;
+        height: 80px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .about-lead {
+        font-size: 1.6rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .about-text p {
+        font-size: 0.8rem !important; /* Slightly smaller for density */
+        line-height: 1.4 !important; /* Crunch line gaps */
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .home-btn {
+        bottom: 0.8rem !important; /* Pull up to avoid OS nav bar */
+    }
+}
+
 /* ------------------------------------- */
 /* LANDSCAPE MOBILE ORIENTATION OVERRIDE */
 /* ------------------------------------- */
