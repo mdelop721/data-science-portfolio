@@ -84,7 +84,9 @@
         <section id="experience" class="snap-section">
             <h2 class="section-title" data-en="E X P E R I E N C E" data-es="E X P E R I E N C I A">E X P E R I E N C I A</h2>
             
-            <div class="experience-scroller">
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">❮</button>
+                <div class="experience-scroller">
                 <div class="experience-card">
                     <div class="exp-icon bg-white">
                         <img src="LogoPRIMEMX.png" alt="Primewireless Logo">
@@ -143,6 +145,9 @@
                     </ul>
                 </div>
             </div>
+            <button class="carousel-btn next-btn" onclick="moveCarousel(1)">❯</button>
+        </div>
+            
             <div class="home-btn">
                 <a href="#skills">↓</a>
             </div>
@@ -154,22 +159,22 @@
             <div class="bento-grid">
                 
                 <!-- Box 1: Core Eng -->
-                <div class="bento-item span-2-col glow-bento">
+                <div class="bento-item glow-bento span-2-col">
                     <div class="bento-text">
                         <h3 data-en="Core Data Analytics" data-es="Análisis de Datos Central">Análisis de Datos Central</h3>
                         <p data-en="Foundation for analytical pipelines and queries." data-es="Base técnica para flujos de datos y consultas analíticas.">Base técnica para flujos de datos y consultas analíticas.</p>
                     </div>
-                    <div class="bento-icon-bar">
+                    <div class="bento-icon-bar icons-only">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg" alt="R" title="R">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" alt="SQL" title="SQL Database">
-                        <img src="snowflake_logo.png" alt="Snowflake" title="Snowflake" style="height: 28px; width: auto; object-fit: contain;">
-                        <img src="Microsoft_Excel-Logo.wine.png" alt="Excel" title="Excel" style="height: 48px; width: auto; object-fit: contain;">
+                        <img src="snowflake_logo.png" alt="Snowflake" title="Snowflake" class="custom-logo">
+                        <img src="Microsoft_Excel-Logo.wine.png" alt="Excel" title="Excel" class="custom-logo xl-trim">
                     </div>
                 </div>
 
-                <!-- Box 2: Predictive -->
-                <div class="bento-item span-2-row dark-bento">
+                <!-- Box 2: Predictive (Desktop Only) -->
+                <div class="bento-item span-2-row dark-bento desktop-box">
                     <div class="bento-text">
                         <h3 data-en="Predictive Modeling" data-es="Modelado Predictivo">Modelado Predictivo</h3>
                         <p data-en="Uncovering hidden patterns through statistical algorithms." data-es="Descubriendo patrones ocultos mediante algoritmos estadísticos.">Descubriendo patrones ocultos mediante algoritmos estadísticos.</p>
@@ -200,15 +205,14 @@
                         <h3 data-en="Visual Analysis" data-es="Análisis Visual">Análisis Visual</h3>
                         <p data-en="Data storytelling and dashboards." data-es="Narrativa de datos y tableros métricos.">Narrativa de datos y tableros métricos.</p>
                     </div>
-                    <div class="bento-icon-bar" style="gap: 20px;">
-                        <!-- Custom Transparent Logos -->
-                        <img src="power_bi_logo.png" alt="Power BI" title="Power BI" style="height: 55px; width: auto; object-fit: contain;">
-                        <img src="tableau_logo.png" alt="Tableau" title="Tableau" style="height: 55px; width: auto; object-fit: contain;">
+                    <div class="bento-icon-bar icons-only visual-icons">
+                        <img src="power_bi_logo.png" alt="Power BI" title="Power BI" class="custom-logo">
+                        <img src="tableau_logo.png" alt="Tableau" title="Tableau" class="custom-logo">
                     </div>
                 </div>
-
-                <!-- Box 4: Architecture -->
-                <div class="bento-item hero-bento">
+                
+                <!-- Box 4: Architecture (Desktop Only) -->
+                <div class="bento-item hero-bento desktop-box">
                     <div class="bento-text">
                         <h3 data-en="Business Strategy" data-es="Estrategia de Negocio">Estrategia de Negocio</h3>
                         <p data-en="Forecasting & Quota Optimization." data-es="Pronósticos y Optimización de Cuotas.">Pronósticos y Optimización de Cuotas.</p>
@@ -222,6 +226,21 @@
                         </svg>
                     </div>
                 </div>
+
+                <!-- Box 5: Predictive & Strategy (Mobile Only) -->
+                <div class="bento-item span-2-col dark-bento text-pills-box mobile-box">
+                    <div class="bento-text">
+                        <h3 data-en="Predictive Modeling & Strategy" data-es="Modelado Predictivo y Estrategia">Modelado Predictivo y Estrategia</h3>
+                    </div>
+                    <ul class="bento-skill-list text-pills">
+                        <li><span data-en="Machine Learning" data-es="Machine Learning">Machine Learning</span></li>
+                        <li><span data-en="Classification" data-es="Clasificación">Clasificación</span></li>
+                        <li><span data-en="Clustering" data-es="Agrupamiento">Agrupamiento</span></li>
+                        <li><span data-en="Regression" data-es="Regresión">Regresión</span></li>
+                        <li><span data-en="Forecasting" data-es="Pronóstico KPI">Pronóstico KPI</span></li>
+                        <li><span data-en="Quota Optimization" data-es="Optimización">Optimización</span></li>
+                    </ul>
+                </div>
             </div>
             
             <!-- Jump back to normal flow -->
@@ -230,30 +249,39 @@
             </div>
         </section>
 
-        <!-- Projects Section remains below -->
+        <!-- Projects Section -->
         <section id="projects" class="snap-section projects-bg">
             <div class="skew-bg"></div>
-            <h2 class="section-title" data-en="P R O J E C T S" data-es="P R O Y E C T O S">P R O Y E C T O S</h2>
             
-            <div class="project-content">
-                <div class="project-visuals">
-                    <div class="visual v1"></div>
-                    <div class="visual v2"></div>
-                    <div class="visual v3"></div>
-                </div>
+            <div class="projects-overlay" style="position: relative; z-index: 5; width: 100%; padding-top: 1rem;">
+                <h2 class="section-title" data-en="P R O J E C T S" data-es="P R O Y E C T O S" style="position: relative; top: 0; width: 100%; text-align: center; margin-bottom: 2rem; white-space: nowrap; font-size: 1.4rem; letter-spacing: 0.2rem;">P R O Y E C T O S</h2>
                 
-                <h3 data-en="Project 1: Real Estate Data Analysis" data-es="Proyecto 1: Análisis de Datos Inmobiliarios">Proyecto 1: Análisis de Datos Inmobiliarios</h3>
-                <div class="tech-icons center">
-                    <span class="icon">py</span>
-                    <span class="icon">sk</span>
-                    <span class="icon">pd</span>
+                <div class="project-content">
+                    <div class="project-visuals mitchell-visuals">
+                        <img src="https://placehold.co/600x300/1e293b/38bdf8?text=Ames+Dataset+Distribution" class="v-img v1" alt="Ames Data">
+                        <div class="v-cluster">
+                            <img src="https://placehold.co/300x200/1e293b/a855f7?text=Regression+Model" class="v-img v2" alt="Model">
+                            <img src="https://placehold.co/300x200/1e293b/10b981?text=Prediction+Output" class="v-img v3" alt="Output">
+                        </div>
+                    </div>
+                    
+                    <h3 class="project-title" data-en="Project 1: Real Estate Data Analysis" data-es="Proyecto 1: Análisis de Datos Inmobiliarios" style="margin-top: 2rem; border-bottom: 2px solid var(--accent-teal); display: inline-block;">
+                        <u style="text-decoration-thickness: 2px;">Proyecto 1:</u> Análisis de Datos Inmobiliarios
+                    </h3>
+                    
+                    <div class="tech-icons center mitchell-icons" style="margin: 1.5rem 0;">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" alt="Scikit-Learn" title="Scikit-Learn">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="Pandas" title="Pandas">
+                    </div>
+                    
+                    <p class="project-desc" data-en="My exploratory analysis topic was the 'Prediction of housing prices using the Ames, Iowa dataset.' In other words, this involved using machine learning and regression models to determine valuation. The aim of this field of research is to bridge the gap between raw data and actionable real estate insights." data-es="Mi tema de análisis exploratorio fue la 'Predicción de precios de viviendas utilizando el dataset de Ames, Iowa'. Es decir, esto implicó el uso de aprendizaje automático y modelos de regresión para determinar tasaciones. El objetivo de este campo de investigación es cerrar la brecha entre los datos sin procesar y el conocimiento práctico del sector inmobiliario.">
+                        Mi tema de análisis exploratorio fue la 'Predicción de precios de viviendas utilizando el dataset de Ames, Iowa'. Es decir, esto implicó el uso de aprendizaje automático y modelos de regresión para determinar tasaciones. El objetivo de este campo de investigación es cerrar la brecha entre los datos sin procesar y el conocimiento práctico del sector inmobiliario.
+                    </p>
                 </div>
-                <p class="project-desc" data-en="My exploratory analysis topic was the 'Prediction of housing prices using the Ames, Iowa dataset.' In other words, this involved using machine learning and regression models to determine valuation. The aim of this field of research is to bridge the gap between raw data and actionable real estate insights." data-es="Mi tema de análisis exploratorio fue la 'Predicción de precios de viviendas utilizando el dataset de Ames, Iowa'. Es decir, esto implicó el uso de aprendizaje automático y modelos de regresión para determinar tasaciones. El objetivo de este campo de investigación es cerrar la brecha entre los datos sin procesar y el conocimiento práctico del sector inmobiliario.">
-                    Mi tema de análisis exploratorio fue la 'Predicción de precios de viviendas utilizando el dataset de Ames, Iowa'. Es decir, esto implicó el uso de aprendizaje automático y modelos de regresión para determinar tasaciones. El objetivo de este campo de investigación es cerrar la brecha entre los datos sin procesar y el conocimiento práctico del sector inmobiliario.
-                </p>
             </div>
             
-            <div class="home-btn bottom">
+            <div class="home-btn bottom" style="z-index: 5;">
                 <a href="#contact">↓</a>
             </div>
         </section>

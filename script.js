@@ -61,3 +61,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('preferredLang') || 'es';
     setLanguage(savedLang);
 });
+
+// Mobile Carousel Engine
+let currentExpSlide = 0;
+window.moveCarousel = function(direction) {
+    if (window.innerWidth > 850 && window.innerHeight > 500) return; // Ensure logic affects mobile OR landscape mobile
+    
+    const scroller = document.querySelector('.experience-scroller');
+    const cards = document.querySelectorAll('.experience-card');
+    const total = cards.length;
+    
+    currentExpSlide += direction;
+    
+    // Looping constraints
+    if (currentExpSlide < 0) currentExpSlide = total - 1;
+    if (currentExpSlide >= total) currentExpSlide = 0;
+    
+    const cardWidth = scroller.clientWidth; // Exactly 85vw
+    scroller.scrollTo({
+        left: currentExpSlide * cardWidth,
+        behavior: 'smooth'
+    });
+};
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 850 && window.innerHeight > 500) {
+        let scroller = document.querySelector('.experience-scroller');
+        if(scroller) scroller.style.transform = 'none';
+        currentExpSlide = 0;
+    }
+});

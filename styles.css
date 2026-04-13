@@ -317,6 +317,9 @@ body {
 }
 
 /* Experience */
+.carousel-btn {
+    display: none; /* Hidden on desktop grids */
+}
 .experience-scroller {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -386,6 +389,15 @@ body {
     justify-content: center;
     margin: 1.5rem 0;
 }
+/* Global SVG constraint to prevent Scikit/Python from absorbing the entire viewport */
+.mitchell-icons img {
+    width: 36px;
+    height: 36px;
+    transition: transform 0.3s ease;
+}
+.mitchell-icons img:hover {
+    transform: scale(1.15);
+}
 
 .icon {
     display: inline-block;
@@ -444,6 +456,7 @@ body {
     position: relative;
     z-index: 10;
     max-width: 800px;
+    margin: 0 auto; /* CRITICAL: Force horizontal centering on Desktop */
     text-align: center;
 }
 
@@ -519,6 +532,11 @@ body {
     color: var(--text-dark);
 }
 
+/* Visibility toggles for Desktop/Mobile isolation */
+.mobile-box {
+    display: none !important;
+}
+
 /* ========================================= */
 /* SKILLS PROPOSALS (BENTO, RADAR, MINIMAL)  */
 /* ========================================= */
@@ -546,7 +564,8 @@ body {
 }
 .bento-icon-bar {
     display: flex;
-    gap: 15px;
+    justify-content: space-around; /* Distribute horizontally */
+    width: 100%; /* Force component to claim full internal width */
     align-items: center;
 }
 .bento-icon-bar.vertical-list {
@@ -578,6 +597,13 @@ body {
     height: 45px;
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
     transition: transform 0.3s ease;
+}
+
+/* Global protection for rectangular SVGs (Snowflake, PowerBI, Tableau) */
+.bento-icon-bar img.custom-logo {
+    width: auto !important;
+    height: 45px !important;
+    object-fit: contain !important;
 }
 .bento-icon-bar img:hover, .bento-icon-bar svg:hover {
     transform: scale(1.15);
@@ -861,4 +887,769 @@ body {
 .submit-btn:hover {
     background-color: #0284c7;
     transform: translateY(-2px);
+}
+
+/* ========================================= */
+/* MOBILE RESPONSIVENESS (SMARTPHONES)       */
+/* ========================================= */
+@media (max-width: 850px) {
+    /* Hide decorative circles */
+    .concentric-circles { display: none; }
+    
+    /* Compact the Top Navigation (Keep it horizontal but remove text) */
+    .top-nav {
+        padding: 1rem 1.5rem;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: rgba(15, 23, 42, 0.95); /* Solid backdrop to avoid clash during scroll */
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .social-icons a {
+        margin-right: 0;
+    }
+    
+    .action-btns {
+        width: auto;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+    
+    /* MAGIC TRICK: Hide text in 'CV' and 'CONTACTAR' to save horizontal space, leaving only SVGs */
+    .action-btns a {
+        font-size: 0;
+    }
+    
+    /* EXCEPT FOR THE CV BUTTON - Target the first anchor since it lacks a class */
+    .action-btns a:first-child {
+        font-size: 0.85rem !important;
+        gap: 5px;
+    }
+    
+    .lang-switcher {
+        margin-left: 0;
+        transform: scale(0.9);
+    }
+    
+    /* Shrink Hero Content for Single Screen Fit */
+    .snap-section {
+        padding-top: 4.5rem; /* Pull everything up securely against nav */
+        padding-bottom: 1rem;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 0.5rem; /* Squeeze gap */
+        border-width: 2px; /* Thinner border for small image */
+    }
+    
+    .subtitle { 
+        font-size: 0.6rem; 
+        margin-bottom: 0.5rem; 
+    }
+
+    .typewriter-container {
+        font-size: 1.35rem;
+        height: auto;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+        min-height: 4rem; /* Cap vertical sprawl */
+    }
+    .cursor { height: 1.35rem; }
+    
+    /* FIX HORIZONTAL OVERFLOW: Wrap the links tightly */
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+    
+    .hero-links a {
+        font-size: 0.65rem;
+        padding: 0.4rem 1rem;
+    }
+    
+    .home-btn {
+        bottom: 1.5rem; /* Pull up to ensure it renders inside the viewport */
+    }
+    
+    .home-btn a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem; /* Shrink button size */
+    }
+    
+    /* About Section */
+    .about-container {
+        flex-direction: column;
+        gap: 1.5rem; /* Tighter gap between image and text */
+        padding: 0 1.5rem;
+        text-align: center;
+        margin-top: 4rem; /* Push down to clear the absolute 'A B O U T' title */
+    }
+    
+    .about-img-wrapper {
+        order: -1; 
+        max-width: 130px; /* Reduce diameter */
+        margin: 0 auto;
+    }
+    
+    .about-photo {
+        border-radius: 50%; /* Perfect circle */
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+    
+    .about-text { text-align: center; }
+    
+    /* Mobile 3-Box Stack Architecture */
+    .bento-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem;
+        width: 100%;
+        gap: 1.2rem;
+        margin-top: 2rem;
+        margin-bottom: 5rem; /* Evitar que el corte diagonal de Proyectos se coma la última caja */
+    }
+    
+    .bento-item {
+        padding: 1.2rem; 
+        border-radius: 14px;
+        justify-content: center !important; /* Quita el espacio innecesario en medio */
+        gap: 0.8rem;
+        min-height: auto !important; /* Deja que la caja se encoja */
+        aspect-ratio: auto !important; /* Cancela el cuadrado obligatorio de PC */
+    }
+    
+    .bento-item h3 {
+        font-size: 0.95rem; 
+        margin-bottom: 0;
+        line-height: 1.3;
+        text-align: center; /* Centramos el texto para la caja encogida */
+    }
+    
+    /* Visibility Toggles */
+    .desktop-box {
+        display: none !important;
+    }
+    
+    .mobile-box {
+        display: flex !important;
+    }
+    
+    /* VIVA EL ZERO-SCROLL: Eliminamos descripciones y etiquetas globales */
+    .bento-item p,
+    .bento-skill-list li::before {
+        display: none !important; 
+    }
+    
+    /* For standard icon lists, hide text */
+    .bento-skill-list:not(.text-pills) li span {
+        display: none !important;
+    }
+    
+    /* Show text inside the new text-pills category */
+    .text-pills-box .bento-skill-list li span {
+        display: inline-block !important;
+        padding: 6px 14px;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 20px; /* Pill shape */
+        font-size: 0.75rem;
+        color: var(--accent-teal);
+        white-space: nowrap;
+    }
+    
+    .bento-icon-bar, .bento-skill-list {
+        flex-direction: row;
+        flex-wrap: wrap; 
+        gap: 8px;
+        justify-content: space-around; /* Distribute icons across FULL available width */
+        margin-top: 0.2rem;
+        padding: 0;
+        width: 100%;
+    }
+    
+    /* Enlarge Visual Analysis specifically */
+    .visual-icons {
+        justify-content: center !important; /* Keep big logos centered */
+        gap: 2.5rem !important; /* Space them out visually */
+    }
+    .visual-icons img {
+        height: 60px !important; /* Much larger for PowerBI/Tableau */
+        width: auto !important;
+    }
+    
+    .bento-skill-list li {
+        padding-left: 0;
+        margin: 0;
+    }
+    
+    .custom-logo {
+        width: auto !important;
+        height: 30px !important;
+        object-fit: contain;
+    }
+    
+    .xl-trim {
+        transform: scale(1.6); /* Excel padding fix */
+    }
+    
+    .bento-icon-bar img, .bento-icon-bar svg, .bento-skill-list svg {
+        width: 32px; /* Restored slightly larger icons since width is 100% now */
+        height: 32px;
+    }
+    
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    }
+    
+    .carousel-btn {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        color: var(--accent-teal);
+        width: 40px;
+        height: 60px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 20;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .prev-btn { left: 0; border-radius: 0 10px 10px 0; }
+    .next-btn { right: 0; border-radius: 10px 0 0 10px; }
+    
+    .experience-scroller {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 0;
+        padding: 0;
+        margin-top: 0;
+        transition: transform 0.4s ease-in-out;
+    }
+    
+    .experience-card {
+        min-width: 100%; /* Use percentage to respect scrollbar bounds */
+        padding: 2rem 3rem; /* Cushion text away from side buttons */
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .bento-item.span-2-row {
+        grid-row: span 1;
+    }
+    
+    .bento-item.span-2-col {
+        grid-column: span 1;
+    }
+    
+    .radar-svg { width: 100%; height: auto; }
+    
+    /* ----------------------- */
+    /* MITCHELL PROJECTS STYLE */
+    /* ----------------------- */
+    .projects-bg {
+        background-color: transparent !important;
+        overflow: hidden;
+        padding-top: 3rem; /* Give P R O Y E C T O S room to breathe */
+    }
+    
+    .skew-bg { 
+        position: absolute;
+        height: 100%; /* Stretch to bottom of actual container */
+        width: 100vw;
+        top: 10%; 
+        background-color: #1e293b !important; 
+        border-top: 2px solid rgba(56, 189, 248, 0.2); 
+        border-bottom: 2px solid rgba(56, 189, 248, 0.2);
+        clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%); /* Parallel upward slashes on top and bottom */
+        transform: none; 
+        z-index: 0;
+    }
+    
+    .mitchell-visuals {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 0.5rem;
+        margin-top: 4rem; /* Push images much lower so the diagonal shape is visible above them */
+        padding: 0 1rem;
+    }
+    
+    .v-img {
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        object-fit: cover;
+    }
+    
+    /* Ridiculously shrink the sizes to match Mitchell's dense cluster */
+    .v1 { width: 100%; height: 90px; margin-bottom: 0.2rem; }
+    
+    .v-cluster {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    .v-cluster .v2, .v-cluster .v3 {
+        width: 48%;
+        height: 70px;
+    }
+    
+    .project-title {
+        font-size: 0.95rem; /* Shrinks title heavily as requested */
+        font-weight: 500;
+        margin-top: 1.5rem !important;
+    }
+    
+    .mitchell-icons img {
+        width: 32px !important; /* Shrink icons */
+        height: 32px !important;
+        margin: 0 6px;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)) !important;
+    }
+    
+    .project-desc {
+        font-size: 0.85rem; /* Shrink paragraph */
+        line-height: 1.4;
+        padding: 0 1rem;
+    }
+    
+    .project-content {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    
+    .contact-container { padding: 0 1.5rem; }
+    .contact-headline { font-size: 1.4rem; margin-bottom: 1.5rem; }
+}
+
+/* ------------------------------------- */
+/* LANDSCAPE MOBILE ORIENTATION OVERRIDE */
+/* ------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Compress footprint to survive 400px heights */
+    .snap-section {
+        min-height: 100vh !important; /* Restore viewport boundary to capture absolute elements */
+        padding-top: 4.5rem !important; /* Restore ceiling gap to prevent nav collision */
+        padding-bottom: 2rem !important;
+    }
+    .profile-img {
+        width: 90px !important;
+        height: 90px !important;
+    }
+    .typewriter-container {
+        font-size: 1.8rem !important;
+        margin-bottom: 1rem !important;
+        height: 2.2rem !important;
+    }
+    .cursor {
+        height: 1.8rem !important;
+    }
+    .hero-links {
+        gap: 0.8rem !important;
+        flex-wrap: wrap !important;
+    }
+    .hero-links a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.7rem !important;
+    }
+    .home-btn {
+        bottom: 0.2rem !important; /* Re-anchor arrow specifically lower to avoid grid collision */
+        transform: translateX(-50%) scale(0.8) !important; 
+    }
+    .subtitle {
+        font-size: 0.65rem !important;
+        margin-bottom: 0.5rem !important;
+        letter-spacing: 0.1em !important;
+    }
+    
+    /* About Section Compression */
+    .section-title {
+        position: relative !important;
+        top: 0 !important;
+        margin-top: 0 !important; /* Prevent pulling upward into previous boundaries */
+        margin-bottom: 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    .about-container {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1.5rem !important; /* Controlled gap */
+    }
+    .about-img-wrapper {
+        flex: 0 0 auto !important; /* Strips the greedy 50% flex expansion causing the massive gap */
+        width: auto !important;
+        max-width: none !important;
+    }
+    .about-photo {
+        width: 140px !important; 
+        min-width: 140px !important;
+        height: 180px !important;
+        border-radius: 8px !important; 
+        aspect-ratio: auto !important;
+    }
+    .about-text {
+        flex: 0 1 55% !important; /* Stop it from eating 100% of the width */
+    }
+    .about-text h3 {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .about-text p {
+        font-size: 0.70rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Experience Section Horizontal Carousel */
+    .carousel-container {
+        display: flex !important; /* Force carousel on */
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin-top: -3.5rem !important; /* Intense pull exclusively lifting the card */
+    }
+    .carousel-btn {
+        display: flex !important;
+        transform: scale(1.5) !important;
+        background: transparent !important;
+        border: none !important;
+        color: var(--accent-teal) !important;
+        box-shadow: none !important;
+        padding: 0 1rem !important;
+    }
+    .carousel-view { display: none !important; } /* Clean up hallucinated class just in case */
+    
+    .experience-scroller {
+        overflow-x: auto !important; 
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+        width: 85vw !important; /* Spans the screen width */
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+    }
+    .experience-card {
+        scroll-snap-align: center !important; /* Locks each card into view smoothly */
+        flex: 0 0 100% !important; /* FORCES EXACTLY ONE CARD */
+        min-width: 100% !important; /* Takes full width of carousel */
+        max-width: none !important; /* Destroys Desktop 380px limit */
+        margin-right: 0 !important;
+        padding: 1rem 1.5rem !important; 
+        height: auto !important;
+        background: rgba(30, 41, 59, 0.6) !important;
+        
+        /* Architecture Rewrite (Float Model) */
+        display: block !important;
+        text-align: left !important;
+    }
+    
+    .experience-card .exp-icon {
+        float: left !important;
+        clear: left !important;
+        width: 80px !important;
+        height: 80px !important;
+        margin: 0 1.5rem 0.5rem 0 !important; /* Right margin pushes text away */
+        padding: 5px !important;
+    }
+    .experience-card .exp-icon img {
+        max-height: 55px !important;
+    }
+    
+    .experience-card h3 {
+        display: block !important;
+        font-size: 1.1rem !important;
+        margin: 0 !important;
+        padding-top: 0.5rem !important;
+    }
+    .company {
+        display: block !important;
+        font-size: 0.85rem !important;
+        margin: 0 0 0.5rem 0 !important; /* Natural gap before bullets */
+    }
+    
+    .experience-card .tech-icons {
+        float: left !important;
+        clear: left !important;
+        width: 80px !important;
+        margin: 0 1.5rem 0 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.3rem !important;
+    }
+    .experience-card .tech-icons .icon {
+        font-size: 0.5rem !important; /* Tiny badges to fit below logo */
+        padding: 2px 6px !important;
+    }
+    
+    .experience-card .date {
+        display: none !important; /* Dropped to conserve vertical span */
+    }
+    
+    .experience-card ul {
+        display: block !important;
+        margin-left: 0 !important;
+        padding-left: 1rem !important; /* Indent bullets naturally */
+        margin-top: 0 !important;
+        overflow: hidden !important; /* Prevents bullets from wrapping under the float unexpectedly */
+    }
+    .experience-card ul li {
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.3rem !important;
+    }
+    
+    /* Skills Section Landscape Override (Micro Desktop Replica) */
+    .bento-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-rows: auto auto !important;
+        gap: 0.5rem !important; /* Miniature gaps */
+        width: 100% !important;
+        margin: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        /* Disable carousel properties */
+        overflow: visible !important;
+        scroll-snap-type: none !important;
+    }
+    
+    .bento-grid::before, .bento-grid::after {
+        display: none !important; /* Destroy carousel peeking pads */
+    }
+    
+    .bento-item {
+        padding: 0.8rem 1rem !important; /* Extreme padding reduction */
+        border-radius: 12px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        /* Strip carousel behavior */
+        flex: auto !important;
+        scroll-snap-align: none !important;
+        min-width: 0 !important;
+    }
+    
+    /* Ensure Desktop Boxes render on Landscape */
+    .desktop-box {
+        display: block !important;
+    }
+    .mobile-box {
+        display: none !important;
+    }
+    
+    /* Re-enable Grid Spanning for Landscape */
+    .bento-item.span-2-col {
+        grid-column: span 2 !important;
+    }
+    .bento-item.span-2-row {
+        grid-row: span 2 !important;
+    }
+    
+    /* Extreme Typography Reduction to fit 400px */
+    .bento-item h3 {
+        font-size: 0.75rem !important;
+        margin-bottom: 0.2rem !important;
+    }
+    
+    .bento-item p {
+        font-size: 0.55rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.4rem !important;
+    }
+    
+    /* Icon Compression */
+    .bento-icon-bar {
+        gap: 0 !important; /* Managed by space-around */
+        justify-content: space-around !important; /* Spread icons cleanly */
+        margin-top: 0.5rem !important; /* Minor breathing room from text */
+        width: 100% !important; 
+    }
+    .bento-icon-bar img, .bento-icon-bar svg {
+        width: 38px !important;
+        height: 38px !important;
+        margin: 0 !important;
+    }
+    /* Critical: Prevent rectangular logos from being squashed into squares */
+    .bento-icon-bar img.custom-logo {
+        width: auto !important;
+        height: 38px !important;
+        object-fit: contain !important;
+    }
+    
+    /* List Compression for Predictive Box */
+    .bento-skill-list li {
+        font-size: 0.55rem !important;
+        margin-bottom: 0.2rem !important;
+        padding-left: 0.5rem !important;
+    }
+    .bento-skill-list svg {
+        width: 12px !important;
+        height: 12px !important;
+        margin-right: 0.3rem !important;
+        margin-bottom: -1px !important;
+    }
+    .bento-skill-list.text-pills {
+        gap: 0.4rem !important; 
+    }
+    .bento-skill-list.text-pills li span {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    /* ========================================= */
+    /* PROJECTS SECTION EXTREME COMPRESSION      */
+    /* ========================================= */
+    #projects .skew-bg {
+        height: 100vh !important; /* Expand physical stripe height to encapsulate all content */
+        transform: translateY(-50%) skewY(-5deg) !important; /* Flatten skew angle slightly to prevent corners from piercing the narrow 400px vertical envelope */
+    }
+    
+    #projects h2.section-title {
+        margin-bottom: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    #projects .project-visuals {
+        margin-bottom: 0.8rem !important;
+    }
+    
+    #projects .visual {
+        height: 70px !important; /* Flat visual cards */
+    }
+    #projects .v1 { width: 90px !important; }
+    #projects .v2 { width: 140px !important; }
+    #projects .v3 { width: 90px !important; }
+    
+    #projects h3.project-title {
+        font-size: 0.95rem !important;
+        margin-top: 0.2rem !important; /* Tight clustering */
+    }
+    
+    #projects .tech-icons.mitchell-icons {
+        margin: 0.5rem 0 !important;
+    }
+    
+    #projects .mitchell-icons img {
+        width: 25px !important; /* Critical SVG containment */
+        height: 25px !important;
+    }
+    
+    #projects .project-desc {
+        font-size: 0.65rem !important;
+        line-height: 1.25 !important;
+        max-width: 95% !important;
+        margin: 0 auto !important;
+    }
+    
+    /* ========================================= */
+    /* CONTACT SECTION EXTREME COMPRESSION       */
+    /* ========================================= */
+    #contact .section-title {
+        margin-bottom: 0 !important; /* Eliminate buffer to pull content upward */
+        font-size: 0.8rem !important;
+    }
+    
+    .contact-container {
+        padding: 0 1rem !important;
+        max-width: 600px !important;
+    }
+    
+    .contact-headline {
+        font-size: 1rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.4rem !important; /* Sliced gap to tug form up */
+    }
+    
+    .contact-info {
+        gap: 0.3rem !important;
+        margin-bottom: 0.5rem !important; /* Sliced gap */
+    }
+    
+    .contact-item {
+        font-size: 0.65rem !important;
+        justify-content: center !important; 
+    }
+    
+    .contact-icon {
+        width: 14px !important;
+        height: 14px !important;
+        margin-right: 0.5rem !important;
+    }
+    
+    .contact-form {
+        gap: 0.5rem !important; /* Compress input gaps */
+    }
+    
+    .contact-form .form-row {
+        gap: 0.5rem !important;
+        flex-direction: row !important; /* Preserve desktop 2-column input row */
+    }
+    
+    .contact-form input, .contact-form textarea {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.65rem !important;
+    }
+    
+    .contact-form textarea {
+        min-height: 45px !important; /* Massive height salvage operation */
+        height: 45px !important;
+    }
+    
+    .submit-btn {
+        padding: 0.5rem !important;
+        font-size: 0.75rem !important;
+        margin-top: 0 !important;
+    }
+    
+    .contact-footer-elements {
+        margin-top: 0.8rem !important;
+        gap: 0.5rem !important;
+    }
+    
+    .contact-footer-elements a {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    .contact-footer-elements svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+    
+    .mock-footer {
+        position: static !important; /* Destroy absolute anchor to join natural flex flow */
+        margin-top: 0.2rem !important;
+    }
+    
+    .mock-footer p {
+        font-size: 0.55rem !important;
+        margin-bottom: 0 !important;
+    }
 }
