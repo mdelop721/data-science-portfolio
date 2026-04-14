@@ -893,11 +893,6 @@ body {
 /* MOBILE RESPONSIVENESS (SMARTPHONES)       */
 /* ========================================= */
 @media (max-width: 850px) {
-    /* FLUID SCALING ENGINE: Automatically mathematically compress all DOM elements on shorter screens */
-    html {
-        font-size: min(16px, 1.83vh); 
-    }
-
     /* Hide decorative circles */
     .concentric-circles { display: none; }
     
