@@ -893,6 +893,11 @@ body {
 /* MOBILE RESPONSIVENESS (SMARTPHONES)       */
 /* ========================================= */
 @media (max-width: 850px) {
+    /* FLUID SCALING ENGINE: Automatically mathematically compress all DOM elements on shorter screens */
+    html {
+        font-size: min(16px, 1.83vh); 
+    }
+
     /* Hide decorative circles */
     .concentric-circles { display: none; }
     
@@ -942,10 +947,10 @@ body {
     }
     
     .profile-img {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 0.5rem; /* Squeeze gap */
-        border-width: 2px; /* Thinner border for small image */
+        width: 6.25rem; /* ~100px */
+        height: 6.25rem;
+        margin-bottom: 0.5rem; 
+        border-width: 2px; 
     }
     
     .subtitle { 
@@ -977,7 +982,7 @@ body {
     }
     
     .home-btn {
-        bottom: 1.5rem; /* Pull up to ensure it renders inside the viewport */
+        bottom: 3.5rem !important; /* Pull up aggressively to clear native OS navigation bars */
     }
     
     .home-btn a {
@@ -997,7 +1002,7 @@ body {
     
     .about-img-wrapper {
         order: -1; 
-        max-width: 130px; /* Reduce diameter */
+        max-width: 8.1rem; /* ~130px */
         margin: 0 auto;
     }
     
@@ -1008,6 +1013,23 @@ body {
     }
     
     .about-text { text-align: center; }
+    
+    /* Typography and Decor Squeeze for Sub-850px Devices */
+    .about-heading {
+        font-size: 1.7rem; /* Compress headline deeply */
+        margin-bottom: 0.8rem;
+    }
+    
+    .highlight::after {
+        height: 2px !important; /* Skinny underline */
+        bottom: 2px !important; /* Pull up to match new font baseline */
+    }
+    
+    .about-text p {
+        font-size: 0.85rem; /* Compress body typography */
+        line-height: 1.5; /* Collapse the 1.8 desktop line-height sprawl */
+        margin-bottom: 0.8rem; /* Shred internal paragraph margins */
+    }
     
     /* Mobile 3-Box Stack Architecture */
     .bento-grid {
@@ -1020,10 +1042,10 @@ body {
     }
     
     .bento-item {
-        padding: 1.2rem; 
+        padding: 0.8rem; /* Compressed to ~70% size */
         border-radius: 14px;
         justify-content: center !important; /* Quita el espacio innecesario en medio */
-        gap: 0.8rem;
+        gap: 0.5rem; /* Compressed gap */
         min-height: auto !important; /* Deja que la caja se encoja */
         aspect-ratio: auto !important; /* Cancela el cuadrado obligatorio de PC */
     }
@@ -1083,7 +1105,7 @@ body {
         gap: 2.5rem !important; /* Space them out visually */
     }
     .visual-icons img {
-        height: 60px !important; /* Much larger for PowerBI/Tableau */
+        height: 3.75rem !important; /* ~60px */
         width: auto !important;
     }
     
@@ -1093,8 +1115,8 @@ body {
     }
     
     .custom-logo {
-        width: auto !important;
-        height: 30px !important;
+        max-width: 4rem !important; /* ~65px */
+        height: auto !important; /* Auto scale height based on choked width */
         object-fit: contain;
     }
     
@@ -1103,8 +1125,8 @@ body {
     }
     
     .bento-icon-bar img, .bento-icon-bar svg, .bento-skill-list svg {
-        width: 32px; /* Restored slightly larger icons since width is 100% now */
-        height: 32px;
+        width: 2rem; /* ~32px */
+        height: 2rem;
     }
     
     .carousel-container {
@@ -1124,8 +1146,8 @@ body {
         background: rgba(56, 189, 248, 0.15);
         border: 1px solid rgba(56, 189, 248, 0.4);
         color: var(--accent-teal);
-        width: 40px;
-        height: 60px;
+        width: 2.5rem; /* ~40px */
+        height: 3.75rem; /* ~60px */
         font-size: 1.5rem;
         cursor: pointer;
         z-index: 20;
@@ -1204,7 +1226,7 @@ body {
     }
     
     /* Ridiculously shrink the sizes to match Mitchell's dense cluster */
-    .v1 { width: 100%; height: 90px; margin-bottom: 0.2rem; }
+    .v1 { width: 100%; height: 5.6rem; margin-bottom: 0.2rem; } /* ~90px */
     
     .v-cluster {
         display: flex;
@@ -1214,7 +1236,7 @@ body {
     }
     .v-cluster .v2, .v-cluster .v3 {
         width: 48%;
-        height: 70px;
+        height: 4.3rem; /* ~70px */
     }
     
     .project-title {
@@ -1224,8 +1246,8 @@ body {
     }
     
     .mitchell-icons img {
-        width: 32px !important; /* Shrink icons */
-        height: 32px !important;
+        width: 2rem !important; /* ~32px */
+        height: 2rem !important;
         margin: 0 6px;
         filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)) !important;
     }
@@ -1241,8 +1263,36 @@ body {
         box-shadow: none !important;
     }
     
+    /* Contact Section Vertical Mobile Squeeze */
     .contact-container { padding: 0 1.5rem; }
-    .contact-headline { font-size: 1.4rem; margin-bottom: 1.5rem; }
+    .contact-headline { font-size: 1.3rem; margin-bottom: 1rem; }
+    .contact-info { margin-bottom: 1rem; gap: 0.5rem; }
+    
+    .contact-item { font-size: 0.95rem; }
+    
+    .contact-form { gap: 0.6rem; }
+    .contact-form input, .contact-form textarea {
+        padding: 0.8rem; /* Shave 0.2rem off every input row natively */
+        font-size: 0.85rem;
+    }
+    
+    /* Suppress massive textarea rows natively */
+    .contact-form textarea {
+        height: 5rem !important; /* ~80px */
+        min-height: 5rem !important; /* ~80px */
+    }
+    
+    .submit-btn { padding: 0.8rem; margin-top: 0; }
+    
+    .contact-footer-elements {
+        margin-top: 1rem !important; /* Slash the huge empty gap to pull text upward */
+        gap: 0.5rem !important;
+    }
+    
+    /* Reattach footer legend directly under the arrow avoiding independent absolute bleeding */
+    .mock-footer {
+        position: static !important;
+    }
 }
 
 
