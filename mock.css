@@ -1165,7 +1165,8 @@ body {
         gap: 0;
         padding: 0;
         margin-top: 0;
-        transition: transform 0.4s ease-in-out;
+        overflow-x: hidden !important; /* MANDATORY: enables native JS scroller.scrollTo() constraints */
+        scroll-behavior: smooth;
     }
     
     .experience-card {
