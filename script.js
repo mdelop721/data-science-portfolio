@@ -112,3 +112,54 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// ==========================================
+// AJAX CONTACT FORM SUBMISSION
+// ==========================================
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent standard POST redirect
+        
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Enviando...'; // Show loading state
+        submitBtn.disabled = true;
+
+        const formData = new FormData(contactForm);
+
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success popup natively without navigating away
+                const popup = document.getElementById('success-popup');
+                if(popup) popup.classList.add('active');
+                
+                // Clear the form fields
+                contactForm.reset();
+                
+                // Auto-hide popup after 5 seconds
+                setTimeout(() => {
+                    if(popup) popup.classList.remove('active');
+                }, 5000);
+            } else {
+                alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error de conexión al enviar el mensaje.');
+        })
+        .finally(() => {
+            // Restore button state
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        });
+    });
+}

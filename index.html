@@ -308,10 +308,9 @@
                     </div>
                 </div>
 
-                <form class="contact-form" action="https://formsubmit.co/m.delgadillo21@hotmail.com" method="POST">
+                <form id="contactForm" class="contact-form" action="https://formsubmit.co/ajax/m.delgadillo21@hotmail.com" method="POST">
                     <!-- FormSubmit Configuration -->
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://mdelop721.github.io/data-science-portfolio/">
                     <input type="hidden" name="_subject" value="¡Nuevo mensaje de tu Portafolio Data Science!">
 
                     <div class="form-row">
@@ -322,6 +321,12 @@
                     <textarea name="Mensaje" placeholder="Mensaje" rows="4" required data-en-placeholder="Message" data-es-placeholder="Mensaje"></textarea>
                     <button type="submit" class="submit-btn" data-en="Submit" data-es="Enviar">Enviar</button>
                 </form>
+
+                <!-- Success Popup -->
+                <div id="success-popup" class="success-popup">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <span data-en="Message sent successfully!" data-es="¡Mensaje enviado exitosamente!">¡Mensaje enviado exitosamente!</span>
+                </div>
             </div>
 
             <div class="contact-footer-elements" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;">

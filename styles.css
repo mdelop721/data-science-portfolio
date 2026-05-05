@@ -1700,3 +1700,35 @@ body {
         margin-bottom: 0 !important;
     }
 }
+
+/* ========================================= */
+/* NOTIFICATIONS                             */
+/* ========================================= */
+.success-popup {
+    background-color: rgba(56, 189, 248, 0.1);
+    border: 1px solid var(--accent-teal);
+    color: var(--accent-teal);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+}
+
+.success-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.success-icon {
+    width: 24px;
+    height: 24px;
+}
