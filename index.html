@@ -308,14 +308,19 @@
                     </div>
                 </div>
 
-                <form class="contact-form">
+                <form class="contact-form" action="https://formsubmit.co/m.delgadillo21@hotmail.com" method="POST">
+                    <!-- FormSubmit Configuration -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://mdelop721.github.io/data-science-portfolio/">
+                    <input type="hidden" name="_subject" value="¡Nuevo mensaje de tu Portafolio Data Science!">
+
                     <div class="form-row">
-                        <input type="text" placeholder="Nombre" required data-en-placeholder="Name" data-es-placeholder="Nombre">
-                        <input type="email" placeholder="Email" required data-en-placeholder="Email" data-es-placeholder="Correo electrónico">
+                        <input type="text" name="Nombre" placeholder="Nombre" required data-en-placeholder="Name" data-es-placeholder="Nombre">
+                        <input type="email" name="Email" placeholder="Email" required data-en-placeholder="Email" data-es-placeholder="Correo electrónico">
                     </div>
-                    <input type="text" placeholder="Asunto" required data-en-placeholder="Subject" data-es-placeholder="Asunto">
-                    <textarea placeholder="Mensaje" rows="4" required data-en-placeholder="Message" data-es-placeholder="Mensaje"></textarea>
-                    <button type="submit" class="submit-btn" onclick="event.preventDefault(); alert('Mensaje simulado enviado con éxito!');" data-en="Submit" data-es="Enviar">Enviar</button>
+                    <input type="text" name="Asunto" placeholder="Asunto" required data-en-placeholder="Subject" data-es-placeholder="Asunto">
+                    <textarea name="Mensaje" placeholder="Mensaje" rows="4" required data-en-placeholder="Message" data-es-placeholder="Mensaje"></textarea>
+                    <button type="submit" class="submit-btn" data-en="Submit" data-es="Enviar">Enviar</button>
                 </form>
             </div>
 
